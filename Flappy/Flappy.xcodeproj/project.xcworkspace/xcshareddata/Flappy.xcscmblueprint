@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "47125D240980A142A8E5B1B391D6E165072FC41D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "766D37B81E41F870842E13356DA1DF5B97DE0B5C" : 9223372036854775807,
+    "47125D240980A142A8E5B1B391D6E165072FC41D" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "D3AB1B6B-2857-4D30-8D87-4ED0452EF60C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "766D37B81E41F870842E13356DA1DF5B97DE0B5C" : "",
+    "47125D240980A142A8E5B1B391D6E165072FC41D" : "flappywemade\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Flappy",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Flappy\/Flappy.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "bitbucket.org:wearethechampion\/flappywemade.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "47125D240980A142A8E5B1B391D6E165072FC41D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "bitbucket.org:wearethechampion\/legendeats.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "766D37B81E41F870842E13356DA1DF5B97DE0B5C"
+    }
+  ]
+}
