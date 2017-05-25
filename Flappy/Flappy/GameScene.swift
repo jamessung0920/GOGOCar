@@ -31,6 +31,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var scoreText = SKLabelNode()
     var gameSetting = Setting.sharedInstance
     
+    var backgroundmusic: SKAudioNode!
+    var stop: Bool!
+    
     override func didMove(to view: SKView) {
         self.anchorPoint = CGPoint (x: 0.5, y: 0.5)
         setup()
@@ -43,6 +46,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         DispatchQueue.main.asyncAfter(deadline: deadTime)
         {
             Timer.scheduledTimer(timeInterval:  TimeInterval(1),target: self, selector: #selector(GameScene.increaseScore), userInfo: nil, repeats: true)
+        }
+        stop = false
+        if let musicURL = Bundle.main.url(forResource: "music", withExtension: "mp3")
+        {
+            backgroundmusic = SKAudioNode(url: musicURL)
+            addChild(backgroundmusic)
         }
     }
     override func update(_ currentTime: TimeInterval) {
