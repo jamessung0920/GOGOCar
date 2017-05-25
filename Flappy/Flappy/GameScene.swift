@@ -26,13 +26,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let rightCarminimumX: CGFloat = 100
     let rightCarmaximumX:CGFloat = 280
     
-    var countDown = 1
-    var stopEverything = true
-    
+    var stopEverything = false
     var score = 0
     var scoreText = SKLabelNode()
     var gameSetting = Setting.sharedInstance
-    
     
     override func didMove(to view: SKView) {
         self.anchorPoint = CGPoint (x: 0.5, y: 0.5)
@@ -42,13 +39,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         Timer.scheduledTimer(timeInterval: TimeInterval(Helper().randomBetweenTwoNumbers(firstNumber: 0.8, secondNumber: 1.8)), target: self, selector: #selector(GameScene.leftItems), userInfo: nil, repeats: true)
         Timer.scheduledTimer(timeInterval: TimeInterval(Helper().randomBetweenTwoNumbers(firstNumber: 0.8, secondNumber: 1.8)), target: self, selector: #selector(GameScene.rightItems), userInfo: nil, repeats: true)
         Timer.scheduledTimer(timeInterval: TimeInterval(0.5), target: self, selector: #selector(GameScene.remove), userInfo: nil, repeats: true)
-        Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(GameScene.startCountDown), userInfo: nil, repeats: true)
         let deadTime = DispatchTime.now() + 1
         DispatchQueue.main.asyncAfter(deadline: deadTime)
         {
             Timer.scheduledTimer(timeInterval:  TimeInterval(1),target: self, selector: #selector(GameScene.increaseScore), userInfo: nil, repeats: true)
         }
-
     }
     override func update(_ currentTime: TimeInterval) {
         if canMove
@@ -106,8 +101,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
 
             }
-            canMove = true
-            
         }
     }
     func setup()
@@ -229,21 +222,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
-    
     //左障礙車
     func leftItems()
     {
         let leftitem: SKSpriteNode
-        let randomNumber = Helper().randomBetweenTwoNumbers(firstNumber: 1, secondNumber: 8)
+        let randomNumber = Helper().randomBetweenTwoNumbers(firstNumber: 1, secondNumber: 6)
         switch Int(randomNumber)
         {
-            case 1...4:
+            case 1...6:
                 leftitem = SKSpriteNode(imageNamed: "orangeCar")
                 leftitem.name = "orangeCar"
-            break
-            case 5...8:
-                leftitem = SKSpriteNode(imageNamed: "greenCar")
-                leftitem.name = "greenCar"
             break
             default:
                 leftitem = SKSpriteNode(imageNamed: "orangeCar")
@@ -251,13 +239,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         leftitem.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         leftitem.zPosition = 10
-        let randomNum = Helper().randomBetweenTwoNumbers(firstNumber: 1, secondNumber: 10)
+        let randomNum = Helper().randomBetweenTwoNumbers(firstNumber: 1, secondNumber: 4)
         switch Int(randomNum)
         {
-            case 1...4:
+            case 1...2:
             leftitem.position.x = -280
             break
-            case 5...10:
+            case 3...4:
             leftitem.position.x = -100
             break
             default:
@@ -275,30 +263,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func rightItems()
     {
         let rightitem: SKSpriteNode
-        let randomNumber = Helper().randomBetweenTwoNumbers(firstNumber: 1, secondNumber: 8)
+        let randomNumber = Helper().randomBetweenTwoNumbers(firstNumber: 1, secondNumber: 6)
         switch Int(randomNumber)
         {
-        case 1...4:
-            rightitem = SKSpriteNode(imageNamed: "orangeCar")
-            rightitem.name = "orangeCar"
-            break
-        case 5...8:
+        case 1...6:
             rightitem = SKSpriteNode(imageNamed: "greenCar")
             rightitem.name = "greenCar"
             break
         default:
-            rightitem = SKSpriteNode(imageNamed: "orangeCar")
-            rightitem.name = "orangeCar"
+            rightitem = SKSpriteNode(imageNamed: "greenCar")
+            rightitem.name = "greenCar"
         }
         rightitem.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         rightitem.zPosition = 10
-        let randomNum = Helper().randomBetweenTwoNumbers(firstNumber: 1, secondNumber: 10)
+        let randomNum = Helper().randomBetweenTwoNumbers(firstNumber: 1, secondNumber: 4)
         switch Int(randomNum)
         {
-        case 1...4:
+        case 1...2:
             rightitem.position.x = 280
             break
-        case 5...10:
+        case 3...4:
             rightitem.position.x = 100
             break
         default:
@@ -321,34 +305,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         menuScene.scaleMode = .aspectFill
         view?.presentScene(menuScene, transition: SKTransition.doorsOpenHorizontal(withDuration: TimeInterval(2)))
     }
-    func startCountDown()
-    {
-        if countDown > 0
-        {
-            if countDown < 4
-            {
-                let countDownLabel = SKLabelNode()
-                countDownLabel.fontName = "AvenirNext-Bold"
-                countDownLabel.fontColor = SKColor.white
-                countDownLabel.fontSize = 300
-                countDownLabel.text = String(countDown)
-                countDownLabel.position = CGPoint(x: 0, y: 0)
-                countDownLabel.zPosition = 300
-                countDownLabel.name = "cLabel"
-                countDownLabel.horizontalAlignmentMode = .center
-                addChild(countDownLabel)
-                
-                let deadTime = DispatchTime.now() + 0.5
-                DispatchQueue.main.asyncAfter(deadline: deadTime, execute: {
-                    countDownLabel.removeFromParent()
-                })
-            }
-            countDown += 1
-            if countDown == 4 {
-                self.stopEverything = false
-            }
-        }
-    }
     func increaseScore()
     {
         if !stopEverything
@@ -357,5 +313,4 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             scoreText.text = String(score)
         }
     }
-
 }
