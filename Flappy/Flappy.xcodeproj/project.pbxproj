@@ -19,7 +19,7 @@
 		4BAAB02B1ED340C6001F7A2A /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAAB02A1ED340C6001F7A2A /* Helper.swift */; };
 		4BAAB02D1ED34FF3001F7A2A /* GameMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4BAAB02C1ED34FF3001F7A2A /* GameMenu.sks */; };
 		4BAAB02F1ED35002001F7A2A /* GameMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAAB02E1ED35002001F7A2A /* GameMenu.swift */; };
-		4BAAB0351ED6CC9D001F7A2A /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4BAAB0341ED6CC9D001F7A2A /* music.mp3 */; };
+		4BAAB0371ED879E4001F7A2A /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4BAAB0361ED879E4001F7A2A /* music.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +58,7 @@
 		4BAAB02A1ED340C6001F7A2A /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		4BAAB02C1ED34FF3001F7A2A /* GameMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameMenu.sks; sourceTree = "<group>"; };
 		4BAAB02E1ED35002001F7A2A /* GameMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMenu.swift; sourceTree = "<group>"; };
-		4BAAB0341ED6CC9D001F7A2A /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = music.mp3; path = ../../../../Downloads/music.mp3; sourceTree = "<group>"; };
+		4BAAB0361ED879E4001F7A2A /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,7 +109,7 @@
 		4BAAAFF51ED292A9001F7A2A /* Flappy */ = {
 			isa = PBXGroup;
 			children = (
-				4BAAB0341ED6CC9D001F7A2A /* music.mp3 */,
+				4BAAB0361ED879E4001F7A2A /* music.mp3 */,
 				4BAAAFF61ED292A9001F7A2A /* AppDelegate.swift */,
 				4BAAAFF81ED292A9001F7A2A /* GameScene.sks */,
 				4BAAAFFC1ED292A9001F7A2A /* GameScene.swift */,
@@ -252,9 +252,9 @@
 			files = (
 				4BAAB02D1ED34FF3001F7A2A /* GameMenu.sks in Resources */,
 				4BAAB0021ED292A9001F7A2A /* Main.storyboard in Resources */,
-				4BAAB0351ED6CC9D001F7A2A /* music.mp3 in Resources */,
 				4BAAAFF91ED292A9001F7A2A /* GameScene.sks in Resources */,
 				4BAAB0041ED292A9001F7A2A /* Assets.xcassets in Resources */,
+				4BAAB0371ED879E4001F7A2A /* music.mp3 in Resources */,
 				4BAAB0071ED292A9001F7A2A /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -527,6 +527,7 @@
 				4BAAB0231ED292A9001F7A2A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4BAAB0241ED292A9001F7A2A /* Build configuration list for PBXNativeTarget "FlappyTests" */ = {
 			isa = XCConfigurationList;
@@ -535,6 +536,7 @@
 				4BAAB0261ED292A9001F7A2A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4BAAB0271ED292A9001F7A2A /* Build configuration list for PBXNativeTarget "FlappyUITests" */ = {
 			isa = XCConfigurationList;
@@ -543,6 +545,7 @@
 				4BAAB0291ED292A9001F7A2A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
