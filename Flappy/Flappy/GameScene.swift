@@ -34,6 +34,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var backgroundmusic: SKAudioNode!
     var stop: Bool!
     
+    var GasLabel = SKLabelNode()
+    var Gas = 10
+    
     override func didMove(to view: SKView) {
         self.anchorPoint = CGPoint (x: 0.5, y: 0.5)
         setup()
@@ -47,6 +50,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         {
             Timer.scheduledTimer(timeInterval:  TimeInterval(1),target: self, selector: #selector(GameScene.increaseScore), userInfo: nil, repeats: true)
         }
+        Timer.scheduledTimer(timeInterval: TimeInterval(3), target: self, selector: #selector(GameScene.gaslimit), userInfo: nil, repeats: true)
         stop = false
         if let musicURL = Bundle.main.url(forResource: "music", withExtension: "mp3")
         {
@@ -65,7 +69,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         var firstBody = SKPhysicsBody()
         var secondBody = SKPhysicsBody()
-        
+      
         if contact.bodyA.node?.name == "leftCar" || contact.bodyA.node?.name == "rightCar"
         {
             firstBody = contact.bodyA
@@ -76,8 +80,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             firstBody = contact.bodyB
             secondBody = contact.bodyA
         }
-        firstBody.node?.removeFromParent()
-        afterCollision()
+    
+        if firstBody.node?.name == "leftCar" && secondBody.node?.name == "orangeCar"
+        {
+            firstBody.node?.removeFromParent()
+            secondBody.node?.removeFromParent()
+            afterCollision()
+        }
+        else if firstBody.node?.name == "rightCar" && secondBody.node?.name == "orangeCar"
+        {
+            firstBody.node?.removeFromParent()
+            secondBody.node?.removeFromParent()
+            afterCollision()
+        }
+        else if firstBody.node?.name == "leftCar" && secondBody.node?.name == "greenCar"
+        {
+            Gas += 1;
+            GasLabel.text = String(Gas)
+            secondBody.node?.removeFromParent()
+        }
+        else if firstBody.node?.name == "rightCar" && secondBody.node?.name == "greenCar"
+        {
+            Gas += 1;
+            GasLabel.text = String(Gas)
+            secondBody.node?.removeFromParent()
+        }
+       
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches
@@ -137,9 +165,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreText.text = "0"
         scoreText.fontColor = SKColor.white
         scoreText.position = CGPoint(x: -self.size.width/2 + 160, y:self.size.height/2 - 110)
-        scoreText.fontSize = 50
+        scoreText.fontSize = 60
         scoreText.zPosition = 4
         addChild(scoreText)
+        
+        GasLabel = childNode(withName: "GasLabel") as! SKLabelNode!
+        
     }
     //中間的線
     func createline()
@@ -193,6 +224,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
+    //leftcar wont get out of screen
     func moveleftCar(leftSide: Bool)
     {
         if leftSide
@@ -212,6 +244,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
+    //rightcar wont get out of screen
     func moverightCar(rightSide: Bool)
     {
         if rightSide
@@ -235,13 +268,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func leftItems()
     {
         let leftitem: SKSpriteNode
-        let randomNumber = Helper().randomBetweenTwoNumbers(firstNumber: 1, secondNumber: 6)
+        let randomNumber = Helper().randomBetweenTwoNumbers(firstNumber: 1, secondNumber: 10)
         switch Int(randomNumber)
         {
             case 1...6:
                 leftitem = SKSpriteNode(imageNamed: "orangeCar")
                 leftitem.name = "orangeCar"
             break
+            case 7...10:
+            leftitem = SKSpriteNode(imageNamed: "greenCar")
+            leftitem.name = "greenCar"
+            break
+
             default:
                 leftitem = SKSpriteNode(imageNamed: "orangeCar")
                 leftitem.name = "orangeCar"
@@ -272,16 +310,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func rightItems()
     {
         let rightitem: SKSpriteNode
-        let randomNumber = Helper().randomBetweenTwoNumbers(firstNumber: 1, secondNumber: 6)
+        let randomNumber = Helper().randomBetweenTwoNumbers(firstNumber: 1, secondNumber: 10)
         switch Int(randomNumber)
         {
         case 1...6:
+            rightitem = SKSpriteNode(imageNamed: "orangeCar")
+            rightitem.name = "orangeCar"
+            break
+        case 7...10:
             rightitem = SKSpriteNode(imageNamed: "greenCar")
             rightitem.name = "greenCar"
             break
+
         default:
-            rightitem = SKSpriteNode(imageNamed: "greenCar")
-            rightitem.name = "greenCar"
+            rightitem = SKSpriteNode(imageNamed: "orangeCar")
+            rightitem.name = "orangeCar"
         }
         rightitem.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         rightitem.zPosition = 10
@@ -320,6 +363,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         {
             score += 1
             scoreText.text = String(score)
+        }
+    }
+    func gaslimit()
+    {
+        if !stopEverything
+        {
+            Gas -= 1
+            GasLabel.text = String(Gas)
+        }
+        if Gas == 10
+        {
+            Gas = 10
+            GasLabel.text = String(Gas)
+        }
+        if Gas == 0
+        {
+            afterCollision()
         }
     }
 }
