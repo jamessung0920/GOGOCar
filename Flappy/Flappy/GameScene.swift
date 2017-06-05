@@ -50,7 +50,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         {
             Timer.scheduledTimer(timeInterval:  TimeInterval(1),target: self, selector: #selector(GameScene.increaseScore), userInfo: nil, repeats: true)
         }
-        Timer.scheduledTimer(timeInterval: TimeInterval(0.3), target: self, selector: #selector(GameScene.gaslimit), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: TimeInterval(3), target: self, selector: #selector(GameScene.gaslimit), userInfo: nil, repeats: true)
         
         stop = false
         if let musicURL = Bundle.main.url(forResource: "music", withExtension: "mp3")
@@ -358,8 +358,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let menuScene = SKScene(fileNamed: "GameMenu")!
         menuScene.scaleMode = .aspectFill
         view?.presentScene(menuScene, transition: SKTransition.doorsOpenHorizontal(withDuration: TimeInterval(2)))
-        print(score)
-        print(gameSetting.highScore)
+        //print(score)
+        //print(gameSetting.highScore)
     }
     func increaseScore()
     {
