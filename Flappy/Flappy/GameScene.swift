@@ -50,7 +50,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         {
             Timer.scheduledTimer(timeInterval:  TimeInterval(1),target: self, selector: #selector(GameScene.increaseScore), userInfo: nil, repeats: true)
         }
-        Timer.scheduledTimer(timeInterval: TimeInterval(3), target: self, selector: #selector(GameScene.gaslimit), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: TimeInterval(0.3), target: self, selector: #selector(GameScene.gaslimit), userInfo: nil, repeats: true)
+        
         stop = false
         if let musicURL = Bundle.main.url(forResource: "music", withExtension: "mp3")
         {
@@ -138,6 +139,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
 
             }
+        canMove = true
         }
     }
     func setup()
@@ -356,6 +358,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let menuScene = SKScene(fileNamed: "GameMenu")!
         menuScene.scaleMode = .aspectFill
         view?.presentScene(menuScene, transition: SKTransition.doorsOpenHorizontal(withDuration: TimeInterval(2)))
+        print(score)
+        print(gameSetting.highScore)
     }
     func increaseScore()
     {
@@ -364,6 +368,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             score += 1
             scoreText.text = String(score)
         }
+
+        
     }
     func gaslimit()
     {
@@ -372,7 +378,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             Gas -= 1
             GasLabel.text = String(Gas)
         }
-        if Gas == 10
+        if Gas >= 10
         {
             Gas = 10
             GasLabel.text = String(Gas)
