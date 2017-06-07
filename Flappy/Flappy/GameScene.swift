@@ -9,6 +9,10 @@
 import SpriteKit
 import GameplayKit
 
+struct Localscore {
+    static let keyOne = "Highscore stored in local"
+}
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var leftCar = SKSpriteNode()
@@ -61,6 +65,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             addChild(backgroundmusic)
         }
     }
+    
     override func update(_ currentTime: TimeInterval) {
         if canMove
         {
@@ -69,6 +74,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         showline()
     }
+    
     func didBegin(_ contact: SKPhysicsContact) {
         var firstBody = SKPhysicsBody()
         var secondBody = SKPhysicsBody()
@@ -128,6 +134,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
        
     }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches
         {
@@ -162,6 +169,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         canMove = true
         }
     }
+    
     func setup()
     {
         leftCar = self.childNode(withName: "leftCar") as! SKSpriteNode
@@ -217,6 +225,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         rightline.position.y = 700
         addChild(rightline)
     }
+    
     func showline()
     {
         enumerateChildNodes(withName: "leftline", using: {(roadline, stop) in
@@ -236,6 +245,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             car.position.y -= 15
         })
     }
+    
     func remove()
     {
         for child in children
@@ -370,17 +380,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         rightitem.physicsBody?.affectedByGravity = false
         addChild(rightitem)
     }
+    
     func afterCollision()
     {   if gameSetting.highScore < score
         {
             gameSetting.highScore = score
         }
+        let defaults = UserDefaults.standard
+        defaults.set(gameSetting.highScore, forKey: Localscore.keyOne)
+        
         let menuScene = SKScene(fileNamed: "GameMenu")!
         menuScene.scaleMode = .aspectFill
         view?.presentScene(menuScene, transition: SKTransition.doorsOpenHorizontal(withDuration: TimeInterval(2)))
         //print(score)
         //print(gameSetting.highScore)
     }
+    
     func increaseScore()
     {
         if !stopEverything
@@ -388,9 +403,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             score += 1
             scoreText.text = String(score)
         }
-
-        
     }
+    
+    func startGasTimer(){
+        gasTimer = Timer.scheduledTimer(timeInterval: TimeInterval(3), target: self, selector: #selector(GameScene.gaslimit), userInfo: nil, repeats: true)
+    }
+    
     func gaslimit()
     {
         if !stopEverything
@@ -402,8 +420,5 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         {
             afterCollision()
         }
-    }
-    func startGasTimer(){
-        gasTimer = Timer.scheduledTimer(timeInterval: TimeInterval(3), target: self, selector: #selector(GameScene.gaslimit), userInfo: nil, repeats: true)
     }
 }

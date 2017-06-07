@@ -19,8 +19,11 @@ class GameMenu: SKScene
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         startGame = self.childNode(withName: "startGame") as! SKLabelNode
         bestScore = self.childNode(withName: "bestScore") as! SKLabelNode
-        bestScore.text = "Best : \(gameSetting.highScore)"
-
+        let defaults = UserDefaults.standard
+        if let highestScoreInLocal = defaults.string(forKey: Localscore.keyOne) {
+            bestScore.text = "Best : \(highestScoreInLocal)"
+            gameSetting.highScore = Int(highestScoreInLocal)!
+        }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches
