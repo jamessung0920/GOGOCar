@@ -36,6 +36,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var GasLabel = SKLabelNode()
     var Gas = 10
+    var fullGas : Bool = false
+    var gasTimer: Timer?
     
     override func didMove(to view: SKView) {
         self.anchorPoint = CGPoint (x: 0.5, y: 0.5)
@@ -50,7 +52,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         {
             Timer.scheduledTimer(timeInterval:  TimeInterval(1),target: self, selector: #selector(GameScene.increaseScore), userInfo: nil, repeats: true)
         }
-        Timer.scheduledTimer(timeInterval: TimeInterval(3), target: self, selector: #selector(GameScene.gaslimit), userInfo: nil, repeats: true)
+        startGasTimer()
         
         stop = false
         if let musicURL = Bundle.main.url(forResource: "music", withExtension: "mp3")
@@ -96,13 +98,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         else if firstBody.node?.name == "leftCar" && secondBody.node?.name == "greenCar"
         {
-            Gas += 1;
+            if Gas >= 10
+            {
+                Gas = 10
+                gasTimer?.invalidate()
+                startGasTimer()
+            }
+            else
+            {
+                Gas += 1
+            }
             GasLabel.text = String(Gas)
             secondBody.node?.removeFromParent()
         }
         else if firstBody.node?.name == "rightCar" && secondBody.node?.name == "greenCar"
         {
-            Gas += 1;
+            if Gas >= 10
+            {
+                Gas = 10
+                gasTimer?.invalidate()
+                startGasTimer()
+            }
+            else
+            {
+                Gas += 1
+            }
             GasLabel.text = String(Gas)
             secondBody.node?.removeFromParent()
         }
@@ -378,14 +398,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             Gas -= 1
             GasLabel.text = String(Gas)
         }
-        if Gas >= 10
-        {
-            Gas = 10
-            GasLabel.text = String(Gas)
-        }
         if Gas == 0
         {
             afterCollision()
         }
+    }
+    func startGasTimer(){
+        gasTimer = Timer.scheduledTimer(timeInterval: TimeInterval(3), target: self, selector: #selector(GameScene.gaslimit), userInfo: nil, repeats: true)
     }
 }
