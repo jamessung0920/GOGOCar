@@ -1,5 +1,3 @@
-best score 亂跳 
-
-best score 關掉重開會不見
+best score 亂跳 (應該是遊戲內容沒停止導致)
 
 車子顏色突然變化
