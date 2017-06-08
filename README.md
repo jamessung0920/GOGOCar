@@ -1,5 +1,5 @@
-best score 亂跳 
+best score 亂跳 (應該是遊戲內容沒停止導致)
 
-best score 關掉重開會不見
+車子顏色突然變化(optional)
 
-車子顏色突然變化
+兩台橘車並排(optional)
