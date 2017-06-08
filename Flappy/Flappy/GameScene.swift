@@ -64,6 +64,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             backgroundmusic = SKAudioNode(url: musicURL)
             addChild(backgroundmusic)
         }
+        print("-----initial stopEverything-----")
+        print(stopEverything)
+        print("--------------------------------")
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -382,10 +385,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func afterCollision()
-    {   if gameSetting.highScore < score
+    {
+        stopEverything = true
+        if gameSetting.highScore < score
         {
             gameSetting.highScore = score
         }
+        print("-----afterCollision stopeverything----")
+        print(stopEverything)
+        print("-------------------")
+        print("-----highscore-----")
+        print(gameSetting.highScore)
+        print("-------------------")
         let defaults = UserDefaults.standard
         defaults.set(gameSetting.highScore, forKey: Localscore.keyOne)
         
