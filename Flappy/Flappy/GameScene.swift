@@ -64,9 +64,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             backgroundmusic = SKAudioNode(url: musicURL)
             addChild(backgroundmusic)
         }
-        print("-----initial stopEverything-----")
-        print(stopEverything)
-        print("--------------------------------")
+        //print("-----initial stopEverything-----")
+        //print(stopEverything)
+        //print("--------------------------------")
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -241,11 +241,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         })
         enumerateChildNodes(withName: "orangeCar", using: {(leftCar, stop) in
             let car = leftCar as! SKSpriteNode
-            car.position.y -= 15
+            if self.score < 15 {
+                car.position.y -= 15
+            }
+            else if self.score >= 15 && self.score < 30 {
+                car.position.y -= 20
+            }
+            else if self.score >= 30 && self.score < 60 {
+                car.position.y -= 25
+            }
+            else {
+                car.position.y -= 30
+            }
         })
         enumerateChildNodes(withName: "greenCar", using: {(rightCar, stop) in
             let car = rightCar as! SKSpriteNode
-            car.position.y -= 15
+            if self.score < 15 {
+                car.position.y -= 15
+            }
+            else if self.score >= 15 && self.score < 30 {
+                car.position.y -= 20
+            }
+            else if self.score >= 30 && self.score < 60 {
+                car.position.y -= 25
+            }
+            else {
+                car.position.y -= 30
+            }
         })
     }
     
@@ -391,9 +413,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         {
             gameSetting.highScore = score
         }
-        print("-----afterCollision stopeverything----")
-        print(stopEverything)
-        print("-------------------")
+        //print("-----afterCollision stopeverything----")
+        //print(stopEverything)
+        //print("-------------------")
         print("-----highscore-----")
         print(gameSetting.highScore)
         print("-------------------")
